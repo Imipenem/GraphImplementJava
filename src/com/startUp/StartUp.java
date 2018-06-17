@@ -1,6 +1,7 @@
-package com.StartUp;
+package com.startUp;
 
-import GraphModel.*;
+import graphModel.Graph;
+import graphModel.Node;
 
 public class StartUp {
 
