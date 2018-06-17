@@ -1,4 +1,4 @@
-package graphModel;
+package graphmodel;
 
 import java.util.ArrayList;
 

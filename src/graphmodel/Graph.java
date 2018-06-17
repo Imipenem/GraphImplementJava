@@ -1,10 +1,10 @@
-package graphModel;
+package graphmodel;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class represents the graph as a graphModel.model.
+ * This class represents the graph as a graphmodel.model.
  * It´s responsible for performing actions on the graph, affecting its components.
  */
 
