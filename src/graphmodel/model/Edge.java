@@ -1,4 +1,4 @@
-package graphmodel;
+package graphmodel.model;
 
 public class Edge {
 

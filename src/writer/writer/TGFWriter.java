@@ -1,4 +1,4 @@
-package writer;
+package writer.writer;
 
 public class TGFWriter {
 }

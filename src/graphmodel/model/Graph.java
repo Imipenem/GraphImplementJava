@@ -1,4 +1,4 @@
-package graphmodel;
+package graphmodel.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,18 +10,18 @@ import java.util.Map;
 
 public class Graph {
 
-    Map<String, Node> m_allNodes;
-    Map<String, Edge> m_allEdges;
+    private Map<String, Node> allNodes;
+    private Map<String, Edge> allEdges;
 
 
-    public Graph(Map<String, Node> m_allNodes, Map<String, Edge> m_allEdges) {
-        this.m_allNodes = m_allNodes;
-        this.m_allEdges = m_allEdges;
+    public Graph(Map<String, Node> allNodes, Map<String, Edge> allEdges) {
+        this.allNodes = allNodes;
+        this.allEdges = allEdges;
     }
 
     public Graph() {
-        m_allEdges = new HashMap<>();
-        m_allNodes = new HashMap<>();
+        allEdges = new HashMap<>();
+        allNodes = new HashMap<>();
     }
 
 
@@ -32,10 +32,10 @@ public class Graph {
      */
     public void addNode(Node... nodes) {
         for (Node n : nodes) {
-            if (m_allNodes.containsValue(n)) {
+            if (allNodes.containsValue(n)) {
                 throw new IllegalArgumentException("Attempted to add an already existing node!");
             }
-            m_allNodes.put(n.getLabel(), n);
+            allNodes.put(n.getLabel(), n);
         }
     }
 
@@ -46,28 +46,29 @@ public class Graph {
      * @param target the target Node
      */
 
-    public void connect (Node source, Node target) {
-        Edge edge = new Edge(source,target);
-        edge.setLabel("Connecting node "+source.getID()+" and its target Node "+target.getID());
-        m_allEdges.put(edge.getLabel(),edge);
+    public void connect(Node source, Node target) {
+        Edge edge = new Edge(source, target);
+        edge.setLabel("Connecting node " + source.getID() + " and its target Node " + target.getID());
+        allEdges.put(edge.getLabel(), edge);
         source.getOutgoingEdges().add(edge);
         target.getIncomingEdges().add(edge);
     }
 
     /**
-     *
      * Checks if two nodes are connected
      *
      * @param source Source Node
      * @param target Target Node
      * @return if the nodes are already connected
-     *
-     * TODO: Requires clever method for other direction!
      */
 
-    public boolean hasConnection(Node source,Node target) {
-        for (Edge e: source.getOutgoingEdges()) {
-            if((e.getTargetNode().equals(target))){
+    public boolean hasConnection(Node source, Node target) {
+
+        for (Edge e : allEdges.values()) {
+
+            if (e.getSourceNode().equals(source) && e.getTargetNode().equals(target)) {
+                return true;
+            } else if (e.getSourceNode().equals(target) && e.getTargetNode().equals(source)) {
                 return true;
             }
         }
@@ -76,19 +77,19 @@ public class Graph {
 
 
     public Map<String, Node> getM_allNodes() {
-        return m_allNodes;
+        return allNodes;
     }
 
     public Map<String, Edge> getM_allEdges() {
-        return m_allEdges;
+        return allEdges;
     }
 
 
     public void setM_allNodes(Map<String, Node> m_allNodes) {
-        this.m_allNodes = m_allNodes;
+        this.allNodes = m_allNodes;
     }
 
     public void setM_allEdges(Map<String, Edge> m_allEdges) {
-        this.m_allEdges = m_allEdges;
+        this.allEdges = m_allEdges;
     }
 }

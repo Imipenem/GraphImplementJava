@@ -1,4 +1,4 @@
-package graphmodel;
+package graphmodel.model;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class Node {
     private int weight;
     private String label;
     private Object UserData;
-    private STATUS m_status;
+    private STATUS status;
     private ArrayList<Edge> IncomingEdges;
     private ArrayList<Edge> OutgoingEdges;
 
@@ -38,7 +38,7 @@ public class Node {
         this.weight = weight;
         this.label = label;
         UserData = userData;
-        m_status = STATUS.NOT_VISITED;
+        status = STATUS.NOT_VISITED;
         IncomingEdges = new ArrayList<>();
         OutgoingEdges = new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class Node {
         this.ID = ID;
         this.weight = weight;
         this.label = label;
-        m_status = STATUS.NOT_VISITED;
+        status = STATUS.NOT_VISITED;
         UserData = new Object();
         IncomingEdges = new ArrayList<>();
         OutgoingEdges = new ArrayList<>();
@@ -56,7 +56,7 @@ public class Node {
     public Node(int ID, String label) {
         this.ID = ID;
         this.label = label;
-        m_status = STATUS.NOT_VISITED;
+        status = STATUS.NOT_VISITED;
         UserData = new Object();
         IncomingEdges = new ArrayList<>();
         OutgoingEdges = new ArrayList<>();
@@ -64,9 +64,9 @@ public class Node {
 
     //GETTERS --------------------------------------------
 
-    public STATUS getM_status() {
+    public STATUS getStatus() {
 
-        return m_status;
+        return status;
     }
 
     public int getID() {
@@ -95,8 +95,8 @@ public class Node {
 
     //SETTERS -------------------------------------------
 
-    public void setM_status(STATUS m_status) {
-        this.m_status = m_status;
+    public void setStatus(STATUS status) {
+        this.status = status;
     }
 
     public void setID(int ID) {
@@ -132,7 +132,7 @@ public class Node {
     public String toString() {
         return "NodeID: " + ID + "\n" +
                 "NodeLabel: " + label + "\n" +
-                "Current Status: " + m_status.getStatusDescription() + "\n" +
+                "Current Status: " + status.getStatusDescription() + "\n" +
                 "UserData: " + UserData.toString() + "\n" +
                 "Node Weight: " + weight;
     }
