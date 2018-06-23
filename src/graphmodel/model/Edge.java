@@ -25,6 +25,17 @@ public class Edge {
         this.label = label;
     }
 
+    /**
+     * @Override Represents the textual contents of a node
+     */
+
+    public String toString() {
+        return "EdgeID: " + ID + "\n" +
+                "EdgeLabel: " + label + "\n" +
+                "Source Node: " + getSourceNode().getID() + "\n" +
+                "Target Node: " + getTargetNode().getID();
+    }
+
     //-----------------GETTERS---------------------
 
     public Node getSourceNode() {

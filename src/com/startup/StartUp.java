@@ -1,3 +1,6 @@
+/**
+ * TODO: Write JUnit tests for all methods instead of testing it within StartUp class!
+ */
 package com.startup;
 
 import graphmodel.model.Graph;
@@ -20,7 +23,6 @@ public class StartUp {
 
         g1.connect(n1, n2);
 
-
         System.out.println(n1.toString());
         System.out.println();
         System.out.println(n2.toString());
@@ -28,6 +30,16 @@ public class StartUp {
         System.out.println(n3.toString());
         System.out.println(g1.hasConnection(n1, n2));
         System.out.println(g1.hasConnection(n2, n1));
-    }
 
+        g1.disconnectUndirected(n1, n2);
+        System.out.println(g1.hasConnection(n1, n2));
+        System.out.println(g1.hasConnection(n2, n1));
+        g1.connect(n1,n3);
+
+        System.out.println(g1.getNodeForID(1));
+        System.out.println(g1.getNodeForID(13));
+
+        System.out.println(g1.getEdgeForNodes(n3,n1));
+        System.out.println(g1.getEdgeForNodes(n1,n2));
+    }
 }
