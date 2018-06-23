@@ -51,16 +51,16 @@ public class Graph {
 
     public void connect(Node source, Node target) throws IllegalArgumentException {
 
-        if (!hasConnection(source, target) && !source.equals(target)) {
+        if (source.equals(target)) {
+            throw new IllegalArgumentException("Connection failed: No self loops allowed!");
+        } else if (hasConnection(source, target)) {
+            throw new IllegalArgumentException("Connection failed: Cannot connect two nodes that are already connected");
+        } else {
             Edge edge = new Edge(source, target);
             edge.setLabel("Connecting node " + source.getID() + " and its target Node " + target.getID());
             allEdges.put(edge.getLabel(), edge);
             source.getOutgoingEdges().add(edge);
             target.getIncomingEdges().add(edge);
-        } else if (source.equals(target)) {
-            throw new IllegalArgumentException("Connection failed: No self loops allowed!");
-        } else {
-            throw new IllegalArgumentException("Connection failed: Cannot connect two nodes that are already connected");
         }
     }
 
@@ -75,7 +75,6 @@ public class Graph {
     public boolean hasConnection(Node source, Node target) {
 
         for (Edge e : allEdges.values()) {
-
             if (e.getSourceNode().equals(source) && e.getTargetNode().equals(target)) {
                 return true;
             } else if (e.getSourceNode().equals(target) && e.getTargetNode().equals(source)) {
@@ -95,11 +94,10 @@ public class Graph {
 
     public void disconnectUndirected(Node source, Node target) throws IllegalArgumentException {
         if (hasConnection(source, target)) {
-
-            for (Edge e : getM_allEdges().values()) {
-
-                if (e.getSourceNode().equals(source) && e.getTargetNode().equals(target) || e.getSourceNode().equals(target) && e.getTargetNode().equals(source)) {
-                    getM_allEdges().values().remove(e);
+            for (Edge e : getAllEdges().values()) {
+                if (e.getSourceNode().equals(source) && e.getTargetNode().equals(target) ||
+                        e.getSourceNode().equals(target) && e.getTargetNode().equals(source)) {
+                    getAllEdges().values().remove(e);
                 }
             }
         } else {
@@ -108,7 +106,7 @@ public class Graph {
     }
 
     public Node getNodeForID(int id) {
-        for (Node n : getM_allNodes().values()) {
+        for (Node n : getAllNodes().values()) {
             if (n.getID() == id) {
                 return n;
             }
@@ -117,8 +115,9 @@ public class Graph {
     }
 
     public Edge getEdgeForNodes(Node source, Node target) {
-        for (Edge e : getM_allEdges().values()) {
-            if (e.getSourceNode().equals(source) && e.getTargetNode().equals(target) || e.getSourceNode().equals(target) && e.getTargetNode().equals(source)) {
+        for (Edge e : getAllEdges().values()) {
+            if (e.getSourceNode().equals(source) && e.getTargetNode().equals(target) ||
+                    e.getSourceNode().equals(target) && e.getTargetNode().equals(source)) {
                 return e;
             }
         }
@@ -126,11 +125,11 @@ public class Graph {
     }
 
 
-    public Map<String, Node> getM_allNodes() {
+    public Map<String, Node> getAllNodes() {
         return allNodes;
     }
 
-    public Map<String, Edge> getM_allEdges() {
+    public Map<String, Edge> getAllEdges() {
         return allEdges;
     }
 
