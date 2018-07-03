@@ -5,6 +5,8 @@ package com.startup;
 
 import graphmodel.model.Graph;
 import graphmodel.model.Node;
+import writer.writer.TGFWriter;
+
 
 public class StartUp {
 
@@ -16,30 +18,15 @@ public class StartUp {
 
         Graph g1 = new Graph();
         g1.addNode(n1, n2, n3);
-
-        n1.setUserData("Frankfurt");
-        n2.setUserData("Hamburg");
-        n3.setUserData("München");
-
         g1.connect(n1, n2);
+        g1.connect(n2, n3);
+        g1.connect(n3, n1);
 
-        System.out.println(n1.toString());
-        System.out.println();
-        System.out.println(n2.toString());
-        System.out.println();
-        System.out.println(n3.toString());
-        System.out.println(g1.hasConnection(n1, n2));
-        System.out.println(g1.hasConnection(n2, n1));
+        Graph g2 = new Graph();
+        g2.addNode(n1, n2);
+        g2.connect(n2,n1);
 
-        g1.disconnectUndirected(n1, n2);
-        System.out.println(g1.hasConnection(n1, n2));
-        System.out.println(g1.hasConnection(n2, n1));
-        g1.connect(n1,n3);
 
-        System.out.println(g1.getNodeForID(1));
-        System.out.println(g1.getNodeForID(13));
-
-        System.out.println(g1.getEdgeForNodes(n3,n1));
-        System.out.println(g1.getEdgeForNodes(n1,n2));
+        TGFWriter.writeGraphToFile(g1,g2);
     }
 }
