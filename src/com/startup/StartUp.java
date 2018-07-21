@@ -1,32 +1,29 @@
 /**
  * TODO: Write JUnit tests for all methods instead of testing it within StartUp class!
+ * TODO: Sort all Nodes for its IDs!
  */
 package com.startup;
 
+import graphmodel.model.Edge;
 import graphmodel.model.Graph;
 import graphmodel.model.Node;
+import parser.parser.TGFParser;
 import writer.writer.TGFWriter;
+
+import java.io.File;
 
 
 public class StartUp {
 
     public static void main(String[] args) {
-
-        Node n1 = new Node(3, "XMR");
-        Node n2 = new Node(2, "goes");
-        Node n3 = new Node(1, "down");
-
         Graph g1 = new Graph();
-        g1.addNode(n1, n2, n3);
-        g1.connect(n1, n2);
-        g1.connect(n2, n3);
-        g1.connect(n3, n1);
+        TGFParser.parseTGF_File(new File("TGF_File.txt"), g1);
 
-        Graph g2 = new Graph();
-        g2.addNode(n1, n2);
-        g2.connect(n2,n1);
-
-
-        TGFWriter.writeGraphToFile(g1,g2);
+        for (Node n : g1.getAllNodes().values()) {
+            System.out.println("Contains node " + n.getID() + " labeled: " + n.getLabel());
+        }
+        for (Edge e : g1.getAllEdges().values()) {
+            System.out.println(e.getLabel());
+        }
     }
 }

@@ -1,0 +1,7 @@
+2 Buy
+3 more
+1 XMR
+#
+1 3 Connecting node 1 and its target Node 3
+2 1 Connecting node 2 and its target Node 1
+3 2 Connecting node 3 and its target Node 2
